@@ -11,3 +11,7 @@ This repository provide the following functions:
 -----------2014-06-09 13:20-----------
 Init commit
 -----------2014-06-09 13:20-----------
+
+-----------2014-06-10 09:35-----------
+1.queryall.sql: Update query command for new database structure.
+-----------2014-06-10 09:35-----------
