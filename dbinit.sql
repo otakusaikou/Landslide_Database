@@ -1,12 +1,12 @@
 --Delete old tables
-DROP TABLE IF EXISTS slide_area;
-DROP TABLE IF EXISTS image;
-DROP TABLE IF EXISTS project;
+DROP TABLE IF EXISTS public.slide_area;
+DROP TABLE IF EXISTS public.image;
+DROP TABLE IF EXISTS public.project;
 
 
 --Create table admin_area, primary key is (county_id, town_id)
-DROP TABLE IF EXISTS admin_area;
-CREATE TABLE admin_area
+DROP TABLE IF EXISTS public.admin_area;
+CREATE TABLE public.admin_area
 (
   county_id character varying(5),
   town_id character varying(10),
@@ -16,8 +16,8 @@ CREATE TABLE admin_area
 );
 
 --Create table working_circle, primary key is workingcircle_id
-DROP TABLE IF EXISTS working_circle;
-CREATE TABLE working_circle
+DROP TABLE IF EXISTS public.working_circle;
+CREATE TABLE public.working_circle
 (
   workingcircle_id character varying(2),
   workingcircle_name character varying(50),
@@ -25,8 +25,8 @@ CREATE TABLE working_circle
 );
 
 --Create table watershed, primary key is water_id
-DROP TABLE IF EXISTS watershed;
-CREATE TABLE watershed
+DROP TABLE IF EXISTS public.watershed;
+CREATE TABLE public.watershed
 (
   water_id character varying(10),
   water_name character varying(30),
@@ -34,8 +34,8 @@ CREATE TABLE watershed
 );
 
 --Create table forest_district, primary key is forest_id
-DROP TABLE IF EXISTS forest_district;
-CREATE TABLE forest_district
+DROP TABLE IF EXISTS public.forest_district;
+CREATE TABLE public.forest_district
 (
   forest_id character varying(2),
   forest_name character varying(50),
@@ -43,8 +43,8 @@ CREATE TABLE forest_district
 );
 
 --Create table reservoir, primary key is reservoir_id
-DROP TABLE IF EXISTS reservoir;
-CREATE TABLE reservoir
+DROP TABLE IF EXISTS public.reservoir;
+CREATE TABLE public.reservoir
 (
   reservoir_id character varying(2),
   reservoir_name character varying(12),
@@ -52,8 +52,8 @@ CREATE TABLE reservoir
 );
 
 --Create table basin, primary key is basin_id
-DROP TABLE IF EXISTS basin;
-CREATE TABLE basin
+DROP TABLE IF EXISTS public.basin;
+CREATE TABLE public.basin
 (
   basin_id character varying(5),
   basin_name character varying(16),
@@ -61,11 +61,11 @@ CREATE TABLE basin
 );
 
 --Create sequence for table project
-DROP SEQUENCE IF EXISTS project_id_area_gid_seq;
-CREATE SEQUENCE project_id_area_gid_seq START 1;
+DROP SEQUENCE IF EXISTS public.project_id_area_gid_seq;
+CREATE SEQUENCE public.project_id_area_gid_seq START 1;
 
 --Create table project, primary key is project_id
-CREATE TABLE project
+CREATE TABLE public.project
 (
   project_id integer NOT NULL DEFAULT nextval('project_id_area_gid_seq'::regclass),
   project_name character varying(80),
@@ -73,8 +73,8 @@ CREATE TABLE project
 );
 
 --Create table image, primary key is image_name, foreign key is project_no, referenced from project(project_id)
-DROP TABLE IF EXISTS image;
-CREATE TABLE image
+DROP TABLE IF EXISTS public.image;
+CREATE TABLE public.image
 (
   image_name character varying(80),
   image_date date,
@@ -85,8 +85,8 @@ CREATE TABLE image
 );
 
 --Create sequence for table slide_area
-DROP SEQUENCE IF EXISTS slide_id_area_gid_seq;
-CREATE SEQUENCE slide_id_area_gid_seq START 1; 
+DROP SEQUENCE IF EXISTS public.slide_id_area_gid_seq;
+CREATE SEQUENCE public.slide_id_area_gid_seq START 1; 
 
 /*
 Create table slide_area, primary key is (slide_id, image_no)
@@ -98,7 +98,7 @@ Foreign keys are (county_no, town_no), referenced from admin_area(county_id, tow
                  forest_no, referenced from forest_district(forest_id)
                  basin_no, referenced from basin(basin_id)*/
                  
-CREATE TABLE slide_area
+CREATE TABLE public.slide_area
 (
   slide_id integer NOT NULL DEFAULT nextval('slide_id_area_gid_seq'::regclass),
   centroid_x numeric,

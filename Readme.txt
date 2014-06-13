@@ -15,3 +15,7 @@ Init commit
 -----------2014-06-10 09:35-----------
 1.queryall.sql: Update query command for new database structure.
 -----------2014-06-10 09:35-----------
+
+-----------2014-06-13 17:28-----------
+1.dbinit.sql, datain.sql: Bug fixed. Specify schema 'public' as target.
+-----------2014-06-13 17:28-----------
