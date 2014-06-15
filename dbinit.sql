@@ -8,10 +8,10 @@ DROP TABLE IF EXISTS public.project;
 DROP TABLE IF EXISTS public.admin_area;
 CREATE TABLE public.admin_area
 (
-  county_id character varying(5),
-  town_id character varying(10),
-  county_name character varying(50),
-  town_name character varying(50),
+  county_id varchar(5) NOT NULL,
+  town_id varchar(10) NOT NULL,
+  county_name varchar(50),
+  town_name varchar(50),
   CONSTRAINT ADMINPK PRIMARY KEY (county_id, town_id)
 );
 
@@ -19,8 +19,8 @@ CREATE TABLE public.admin_area
 DROP TABLE IF EXISTS public.working_circle;
 CREATE TABLE public.working_circle
 (
-  workingcircle_id character varying(2),
-  workingcircle_name character varying(50),
+  workingcircle_id varchar(2) NOT NULL,
+  workingcircle_name varchar(50),
   CONSTRAINT WORKPK PRIMARY KEY (workingcircle_id)
 );
 
@@ -28,8 +28,8 @@ CREATE TABLE public.working_circle
 DROP TABLE IF EXISTS public.watershed;
 CREATE TABLE public.watershed
 (
-  water_id character varying(10),
-  water_name character varying(30),
+  water_id varchar(10) NOT NULL,
+  water_name varchar(30),
   CONSTRAINT WARTERPK PRIMARY KEY (water_id)
 );
 
@@ -37,8 +37,8 @@ CREATE TABLE public.watershed
 DROP TABLE IF EXISTS public.forest_district;
 CREATE TABLE public.forest_district
 (
-  forest_id character varying(2),
-  forest_name character varying(50),
+  forest_id varchar(2) NOT NULL,
+  forest_name varchar(50),
   CONSTRAINT FORESTPK PRIMARY KEY (forest_id)
 );
 
@@ -46,8 +46,8 @@ CREATE TABLE public.forest_district
 DROP TABLE IF EXISTS public.reservoir;
 CREATE TABLE public.reservoir
 (
-  reservoir_id character varying(2),
-  reservoir_name character varying(12),
+  reservoir_id varchar(2) NOT NULL,
+  reservoir_name varchar(12),
   CONSTRAINT RESERVPK PRIMARY KEY (reservoir_id)
 );
 
@@ -55,8 +55,8 @@ CREATE TABLE public.reservoir
 DROP TABLE IF EXISTS public.basin;
 CREATE TABLE public.basin
 (
-  basin_id character varying(5),
-  basin_name character varying(16),
+  basin_id varchar(5) NOT NULL,
+  basin_name varchar(16),
   CONSTRAINT BASINPK PRIMARY KEY (basin_id)
 );
 
@@ -68,7 +68,7 @@ CREATE SEQUENCE public.project_id_area_gid_seq START 1;
 CREATE TABLE public.project
 (
   project_id integer NOT NULL DEFAULT nextval('project_id_area_gid_seq'::regclass),
-  project_name character varying(80),
+  project_name varchar(25),
   CONSTRAINT PROJECTPK PRIMARY KEY (project_id)
 );
 
@@ -76,7 +76,7 @@ CREATE TABLE public.project
 DROP TABLE IF EXISTS public.image;
 CREATE TABLE public.image
 (
-  image_name character varying(80),
+  image_name varchar(25) NOT NULL,
   image_date date,
   project_no integer,
   CONSTRAINT IMAGEPK PRIMARY KEY (image_name),
@@ -105,14 +105,14 @@ CREATE TABLE public.slide_area
   centroid_y numeric,
   area numeric,
   geom geometry(MultiPolygon,3826),
-  image_no character varying(20),
-  county_no character varying(5),
-  town_no character varying(10),
-  workingcircle_no character varying(2),
-  reservoir_no character varying(12),
-  water_no character varying(10),
-  forest_no character varying(2),
-  basin_no character varying(5),
+  image_no varchar(20),
+  county_no varchar(5),
+  town_no varchar(10),
+  workingcircle_no varchar(2),
+  reservoir_no varchar(12),
+  water_no varchar(10),
+  forest_no varchar(2),
+  basin_no varchar(5),
   
   CONSTRAINT SLIDEPK 
     PRIMARY KEY (slide_id, image_no),
