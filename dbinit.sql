@@ -105,7 +105,7 @@ CREATE TABLE public.slide_area
   centroid_y numeric,
   area numeric,
   geom geometry(MultiPolygon,3826),
-  image_no varchar(20),
+  image_no varchar(25),
   county_no varchar(5),
   town_no varchar(10),
   workingcircle_no varchar(2),
