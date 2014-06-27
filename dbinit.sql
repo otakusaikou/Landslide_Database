@@ -1,6 +1,5 @@
 --Delete old tables
 DROP TABLE IF EXISTS public.slide_area;
-DROP TABLE IF EXISTS public.image;
 DROP TABLE IF EXISTS public.project;
 
 
@@ -69,19 +68,8 @@ CREATE TABLE public.project
 (
   project_id integer NOT NULL DEFAULT nextval('project_id_area_gid_seq'::regclass),
   project_name varchar(25),
+  project_date date,
   CONSTRAINT PROJECTPK PRIMARY KEY (project_id)
-);
-
---Create table image, primary key is image_name, foreign key is project_no, referenced from project(project_id)
-DROP TABLE IF EXISTS public.image;
-CREATE TABLE public.image
-(
-  image_name varchar(25) NOT NULL,
-  image_date date,
-  project_no integer,
-  CONSTRAINT IMAGEPK PRIMARY KEY (image_name),
-  CONSTRAINT IMAGEFK_ADMIN
-    FOREIGN KEY (project_no) REFERENCES project(project_id)
 );
 
 --Create sequence for table slide_area
@@ -89,15 +77,15 @@ DROP SEQUENCE IF EXISTS public.slide_id_area_gid_seq;
 CREATE SEQUENCE public.slide_id_area_gid_seq START 1; 
 
 /*
-Create table slide_area, primary key is (slide_id, image_no)
+Create table slide_area, primary key is slide_id
 Foreign keys are (county_no, town_no), referenced from admin_area(county_id, town_id)
-                 image_no, referenced from image(image_name)
+                 project_no, referenced from project(project_id)
                  workingcircle_no, referenced from working_circle(workingcircle_id)
                  reservoir_no, referenced from reservoir(reservoir_id)
                  water_no, referenced from watershed(water_id)
                  forest_no, referenced from forest_district(forest_id)
                  basin_no, referenced from basin(basin_id)*/
-                 
+
 CREATE TABLE public.slide_area
 (
   slide_id integer NOT NULL DEFAULT nextval('slide_id_area_gid_seq'::regclass),
@@ -105,7 +93,7 @@ CREATE TABLE public.slide_area
   centroid_y numeric,
   area numeric,
   geom geometry(MultiPolygon,3826),
-  image_no varchar(25),
+  project_no integer,
   county_no varchar(5),
   town_no varchar(10),
   workingcircle_no varchar(2),
@@ -115,11 +103,11 @@ CREATE TABLE public.slide_area
   basin_no varchar(5),
   
   CONSTRAINT SLIDEPK 
-    PRIMARY KEY (slide_id, image_no),
+    PRIMARY KEY (slide_id),
   CONSTRAINT SLIDEFK_ADMIN
     FOREIGN KEY (county_no, town_no) REFERENCES admin_area(county_id, town_id),    
-  CONSTRAINT SLIDEFK_PHOTO
-    FOREIGN KEY (image_no) REFERENCES image(image_name),
+  CONSTRAINT SLIDEFK_PROJECT 
+    FOREIGN KEY (project_no) REFERENCES project(project_id),
   CONSTRAINT SLIDEFK_WORK
     FOREIGN KEY (workingcircle_no) REFERENCES working_circle(workingcircle_id),
   CONSTRAINT SLIDEFK_RESERV

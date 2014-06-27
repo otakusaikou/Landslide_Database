@@ -41,27 +41,15 @@ WHERE (county_id, town_id) NOT IN (SELECT county_id, town_id
                                    FROM admin_area);
                                    
                                    
---Insert values (project) from table result which is not exist in table project, the sequence before project is project_id
+--Insert values (project, dmcdate) from table result which is not exist in table project, the sequence is project_id
 INSERT INTO public.project 
-SELECT nextval('project_id_area_gid_seq'::regclass), project
-FROM (SELECT DISTINCT project
+SELECT nextval('project_id_area_gid_seq'::regclass), project, dmcdate::date
+FROM (SELECT DISTINCT project, dmcdate
       FROM public.result
       WHERE project NOT IN (SELECT project_name
                             FROM public.project)) AS T;
                             
---Insert values [dmcname(unnested), dmcdate, project_id(referenced from table project)] from table result which is not exist in table image
-INSERT INTO public.image
-SELECT image, dmcdate::date, project_id
-FROM (SELECT DISTINCT project_id
-      FROM public.result JOIN public.project ON project = project_name) T3,
-     (SELECT image, dmcdate
-      FROM (SELECT image, dmcdate
-            FROM (SELECT DISTINCT unnest(string_to_array(replace(replace(dmcname, '{', ''), '}', ''), ',')) image, dmcdate
-                  FROM public.result) AS T
-            ORDER BY image) AS T2) T4;
-            
---Insert values [slide_id, centroid_x, centroid_y, area, geom, dmcname(unnested), county_id, town_id, working_id, reserv_id, watersh_id, forest_id, basin_id] from table result which is not exist in table slide_area
+--Insert values [slide_id, centroid_x, centroid_y, area, geom, project_id, county_id, town_id, working_id, reserv_id, watersh_id, forest_id, basin_id] from table result and project which is not exist in table slide_area
 INSERT INTO public.slide_area
-SELECT slide_id, centroid_x, centroid_y, area, geom, unnest(dmcname) image_name, county_id, town_id, working_id, reserv_id, watersh_id, forest_id, basin_id
-FROM (SELECT DISTINCT nextval('slide_id_area_gid_seq'::regclass) slide_id, centroid_x, centroid_y, area, geom, string_to_array(replace(replace(dmcname, '{', ''), '}', ''), ',') dmcname, county_id, town_id, working_id, reserv_id, watersh_id, forest_id, basin_id
-      FROM public.result) AS T;
+SELECT nextval('slide_id_area_gid_seq'::regclass) slide_id, centroid_x, centroid_y, area, geom, project_id, county_id, town_id, working_id, reserv_id, watersh_id, forest_id, basin_id
+FROM public.result JOIN public.project ON project = project_name

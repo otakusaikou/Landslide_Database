@@ -27,3 +27,9 @@ Init commit
  Change image_name type to varchar(25) in table image.
  Change image_no type to varchar(25) in table slide_area.
 -----------2014-06-15 21:20----------
+
+-----------2014-06-28 03:10----------
+1.dbinit.sql: Delete unused entry image.
+2.datain.sql: Algorithm modified.
+3.queryall.sql: Update query command for new database structure.
+-----------2014-06-28 03:10----------
