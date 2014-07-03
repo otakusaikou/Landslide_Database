@@ -33,3 +33,7 @@ Init commit
 2.datain.sql: Algorithm modified.
 3.queryall.sql: Update query command for new database structure.
 -----------2014-06-28 03:10----------
+
+-----------2014-07-04 04:35----------
+1.dbinit.sql: Add handling for table ownership.
+-----------2014-07-04 04:35----------

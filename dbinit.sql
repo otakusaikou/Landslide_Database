@@ -13,6 +13,7 @@ CREATE TABLE public.admin_area
   town_name varchar(50),
   CONSTRAINT ADMINPK PRIMARY KEY (county_id, town_id)
 );
+ALTER TABLE public.admin_area OWNER TO postgres;
 
 --Create table working_circle, primary key is workingcircle_id
 DROP TABLE IF EXISTS public.working_circle;
@@ -22,6 +23,7 @@ CREATE TABLE public.working_circle
   workingcircle_name varchar(50),
   CONSTRAINT WORKPK PRIMARY KEY (workingcircle_id)
 );
+ALTER TABLE public.working_circle OWNER TO postgres;
 
 --Create table watershed, primary key is water_id
 DROP TABLE IF EXISTS public.watershed;
@@ -31,6 +33,7 @@ CREATE TABLE public.watershed
   water_name varchar(30),
   CONSTRAINT WARTERPK PRIMARY KEY (water_id)
 );
+ALTER TABLE public.watershed OWNER TO postgres;
 
 --Create table forest_district, primary key is forest_id
 DROP TABLE IF EXISTS public.forest_district;
@@ -40,6 +43,7 @@ CREATE TABLE public.forest_district
   forest_name varchar(50),
   CONSTRAINT FORESTPK PRIMARY KEY (forest_id)
 );
+ALTER TABLE public.forest_district OWNER TO postgres;
 
 --Create table reservoir, primary key is reservoir_id
 DROP TABLE IF EXISTS public.reservoir;
@@ -49,6 +53,7 @@ CREATE TABLE public.reservoir
   reservoir_name varchar(12),
   CONSTRAINT RESERVPK PRIMARY KEY (reservoir_id)
 );
+ALTER TABLE public.reservoir OWNER TO postgres;
 
 --Create table basin, primary key is basin_id
 DROP TABLE IF EXISTS public.basin;
@@ -58,6 +63,7 @@ CREATE TABLE public.basin
   basin_name varchar(16),
   CONSTRAINT BASINPK PRIMARY KEY (basin_id)
 );
+ALTER TABLE public.basin OWNER TO postgres;
 
 --Create sequence for table project
 DROP SEQUENCE IF EXISTS public.project_id_area_gid_seq;
@@ -71,6 +77,7 @@ CREATE TABLE public.project
   project_date date,
   CONSTRAINT PROJECTPK PRIMARY KEY (project_id)
 );
+ALTER TABLE public.project OWNER TO postgres;
 
 --Create sequence for table slide_area
 DROP SEQUENCE IF EXISTS public.slide_id_area_gid_seq;
@@ -119,3 +126,4 @@ CREATE TABLE public.slide_area
   CONSTRAINT SLIDEFK_BASIN
     FOREIGN KEY (basin_no) REFERENCES basin(basin_id)
 );
+ALTER TABLE public.slide_area OWNER TO postgres;
