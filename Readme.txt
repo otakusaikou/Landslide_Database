@@ -37,3 +37,7 @@ Init commit
 -----------2014-07-04 04:35----------
 1.dbinit.sql: Add handling for table ownership.
 -----------2014-07-04 04:35----------
+
+-----------2014-07-04 04:35----------
+1.datain.sql: Let the program delete result table after loading data to all tables.
+-----------2014-07-04 04:35----------
