@@ -52,6 +52,6 @@ FROM (SELECT DISTINCT project, dmcdate
 --Insert values [slide_id, centroid_x, centroid_y, area, geom, project_id, county_id, town_id, working_id, reserv_id, watersh_id, forest_id, basin_id] from table result and project which is not exist in table slide_area
 INSERT INTO public.slide_area
 SELECT nextval('slide_id_area_gid_seq'::regclass) slide_id, centroid_x, centroid_y, area, geom, project_id, county_id, town_id, working_id, reserv_id, watersh_id, forest_id, basin_id
-FROM public.result JOIN public.project ON project = project_name
+FROM public.result JOIN public.project ON project = project_name;
 
 DROP TABLE IF EXISTS result;
