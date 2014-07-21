@@ -47,3 +47,6 @@ Update Log
 ####2014-07-10 12:28
 + 1.  datain.sql: Let the program delete result table after loading data to all tables.  
 
+***
+####2014-07-22 01:12
++ 1.  datain.sql: Let the program create template view by joining all tables together.
