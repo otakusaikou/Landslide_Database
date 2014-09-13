@@ -66,22 +66,21 @@ CREATE TABLE public.basin
 ALTER TABLE public.basin OWNER TO postgres;
 
 --Create sequence for table project
-DROP SEQUENCE IF EXISTS public.project_id_area_gid_seq;
-CREATE SEQUENCE public.project_id_area_gid_seq START 1;
+DROP SEQUENCE IF EXISTS public.project_id_seq;
+CREATE SEQUENCE public.project_id_seq START 1;
 
 --Create table project, primary key is project_id
 CREATE TABLE public.project
 (
-  project_id integer NOT NULL DEFAULT nextval('project_id_area_gid_seq'::regclass),
-  project_name varchar(25),
+  project_id integer NOT NULL DEFAULT nextval('project_id_seq'::regclass),
   project_date date,
   CONSTRAINT PROJECTPK PRIMARY KEY (project_id)
 );
 ALTER TABLE public.project OWNER TO postgres;
 
 --Create sequence for table slide_area
-DROP SEQUENCE IF EXISTS public.slide_id_area_gid_seq;
-CREATE SEQUENCE public.slide_id_area_gid_seq START 1; 
+DROP SEQUENCE IF EXISTS public.slide_id_seq;
+CREATE SEQUENCE public.slide_id_seq START 1; 
 
 /*
 Create table slide_area, primary key is slide_id
@@ -95,7 +94,7 @@ Foreign keys are (county_no, town_no), referenced from admin_area(county_id, tow
 
 CREATE TABLE public.slide_area
 (
-  slide_id integer NOT NULL DEFAULT nextval('slide_id_area_gid_seq'::regclass),
+  slide_id integer NOT NULL DEFAULT nextval('slide_id_seq'::regclass),
   centroid_x numeric,
   centroid_y numeric,
   area numeric,

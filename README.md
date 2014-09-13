@@ -50,3 +50,7 @@ Update Log
 ***
 ####2014-07-22 01:12
 + 1.  datain.sql: Let the program create template view by joining all tables together.
+
+***
+####2014-09-13 23:27
++ 1. All: Delete attribute 'project_name' in table 'project'.  
